@@ -28,6 +28,165 @@
 
     <main id="app">
       <section class="screen screen--intro is-active" id="intro" data-screen="intro">
+        <div class="prototype-lab">
+          <div class="lab-shell reveal">
+            <div class="lab-copy">
+              <h1>Kostenloser Enterprise SaaS-Prototyp</h1>
+              <p class="lab-lead">
+                Aus Website, Umsatz und Geschäftsmodell wird eine konkrete SaaS-Idee:
+                kompakt geprüft, klar priorisiert und als Prototyp-Richtung aufbereitet.
+              </p>
+              <div class="lab-actions">
+                <button class="primary-cta" type="button" data-start>
+                  Prototyp kostenlos anfragen
+                  <span aria-hidden="true">→</span>
+                </button>
+                <span class="microcopy">90 Sekunden. Keine Beratungsschleife.</span>
+              </div>
+            </div>
+
+            <div class="lab-visual" aria-hidden="true">
+              <div class="blueprint-slab">
+                <div class="blueprint-header">
+                  <span></span>
+                  Prototype Lab
+                </div>
+                <div class="blueprint-main">SaaS Blueprint</div>
+                <div class="blueprint-flow">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                <div class="blueprint-modules">
+                  <b>Website</b>
+                  <b>Umsatz</b>
+                  <b>Ziel</b>
+                </div>
+              </div>
+              <div class="lab-ring lab-ring--one"></div>
+              <div class="lab-ring lab-ring--two"></div>
+              <div class="lab-beam"></div>
+            </div>
+          </div>
+
+          <div class="lab-strip reveal reveal--delay" aria-label="Benötigte Signale">
+            <span>Website</span>
+            <span>Monatlicher Umsatz</span>
+            <span>SaaS-Ziel</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen--quiz" id="quiz" data-screen="quiz" aria-live="polite">
+        <div class="quiz-shell">
+          <div class="quiz-progress">
+            <span id="stepLabel">Frage 1 von 6</span>
+            <div class="progress-track"><div id="progressBar"></div></div>
+          </div>
+          <div class="quiz-card">
+            <p class="eyebrow" id="questionKicker">SaaS-Prototyp</p>
+            <h2 id="questionTitle"></h2>
+            <p id="questionHint" class="question-hint"></p>
+            <div id="answerArea" class="answer-area"></div>
+            <div class="quiz-nav">
+              <button class="ghost-btn" type="button" id="backBtn">Zurück</button>
+              <button class="primary-cta primary-cta--compact" type="button" id="nextBtn">
+                Weiter
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+          <aside class="insight-panel">
+            <span>Live Signal</span>
+            <strong id="signalTitle">SaaS-Prototyp-Profil wird aufgebaut</strong>
+            <p id="signalText">Je präziser die Antworten, desto besser kann CPI das Potenzial einschätzen.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen screen--lead" id="lead" data-screen="lead">
+        <div class="lead-shell">
+          <div class="lead-copy">
+            <p class="eyebrow">Fast geschafft</p>
+            <h2>Jetzt kostenlosen SaaS-Prototyp anfragen.</h2>
+            <p>
+              CPI erhält Ihr Profil und kann einschätzen, welche SaaS-Richtung
+              für Ihr Unternehmen realistisch, verkaufbar und technisch sinnvoll ist.
+            </p>
+            <div class="lead-summary" id="leadSummary"></div>
+          </div>
+          <form class="lead-form" id="leadForm">
+            <label>
+              Name
+              <input name="name" autocomplete="name" placeholder="Max Mustermann" required />
+            </label>
+            <label>
+              Business E-Mail
+              <input name="email" type="email" autocomplete="email" placeholder="max@unternehmen.de" required />
+            </label>
+            <label>
+              Unternehmen
+              <input name="company" autocomplete="organization" placeholder="Unternehmensname" required />
+            </label>
+            <label>
+              Telefon
+              <input name="phone" autocomplete="tel" placeholder="+49 ..." />
+            </label>
+            <button class="primary-cta form-submit" type="submit">
+              Kostenlosen Prototyp anfragen
+              <span aria-hidden="true">→</span>
+            </button>
+            <p class="form-note">Prototyp: Die Anfrage wird lokal im Browser gespeichert. Für Live-Betrieb CRM/Webhook anbinden.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="screen screen--done" id="done" data-screen="done">
+        <div class="done-card">
+          <p class="eyebrow">Lead qualifiziert</p>
+          <h2>Danke. Das SaaS-Prototyp-Profil ist bereit.</h2>
+          <p>
+            Im Live-Funnel würde diese Anfrage jetzt direkt in CRM, Slack oder
+            E-Mail laufen. Für Tests ist sie im Browser gespeichert.
+          </p>
+          <button class="secondary-cta" type="button" data-restart>Neuen Lead erfassen</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kostenloser Enterprise SaaS-Prototyp | CPI Technologies</title>
+    <meta
+      name="description"
+      content="Kostenlosen Enterprise SaaS-Prototyp von CPI Technologies anfragen. Website, Umsatz und Zielbild eintragen und prüfen lassen."
+    />
+    <link rel="icon" href="assets/cpi-logo.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="cursor-light" aria-hidden="true"></div>
+    <div class="scanline" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#intro" aria-label="CPI Technologies Funnel Start">
+        <img src="assets/cpi-logo.svg" alt="CPI Technologies" />
+      </a>
+      <div class="topbar__status">
+        <span></span>
+        AI-native Lead Check
+      </div>
+    </header>
+
+    <main id="app">
+      <section class="screen screen--intro is-active" id="intro" data-screen="intro">
         <div class="hero-grid">
           <div class="hero-copy reveal">
             <h1>Kostenloser Enterprise SaaS-Prototyp</h1>
