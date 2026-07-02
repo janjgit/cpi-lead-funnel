@@ -6,6 +6,206 @@
     <title>CPI Technologies | AI-Projekt Check</title>
     <meta
       name="description"
+      content="Kostenloser Enterprise SaaS-Prototyp von CPI Technologies. Website, Umsatz und Zielbild eintragen und technische Einschätzung anfragen."
+    />
+    <link rel="icon" href="assets/cpi-logo.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="cursor-light" aria-hidden="true"></div>
+    <div class="scanline" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#intro" aria-label="CPI Technologies Funnel Start">
+        <img src="assets/cpi-logo.svg" alt="CPI Technologies" />
+      </a>
+      <div class="topbar__status">
+        <span></span>
+        AI-native Lead Check
+      </div>
+    </header>
+
+    <main id="app">
+      <section class="screen screen--intro is-active" id="intro" data-screen="intro">
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Kostenloser Enterprise SaaS-Prototyp</p>
+            <h1>Finden Sie heraus, wie Ihr nächstes Tech-Produkt aussehen könnte.</h1>
+            <p class="hero-lead">
+              CPI prüft in wenigen Minuten, ob aus Ihrer Idee ein AI-Agent, eine
+              Automatisierung, eine SaaS-Plattform oder ein skalierbarer Software-Sprint
+              werden kann.
+            </p>
+            <div class="hero-offer">
+              <strong>Was Sie anfragen:</strong>
+              <span>eine kostenlose technische Ersteinschätzung inklusive Prototyp-Richtung, Aufwandssignal und nächstem sinnvollen Schritt.</span>
+            </div>
+            <div class="hero-actions">
+              <button class="primary-cta" type="button" data-start>
+                Prototyp-Chance prüfen
+                <span aria-hidden="true">→</span>
+              </button>
+              <span class="microcopy">Dauer: ca. 90 Sekunden</span>
+            </div>
+            <div class="signal-row" aria-label="CPI Leistungsbereiche">
+              <span>AI Agents</span>
+              <span>MCP Server</span>
+              <span>SaaS</span>
+              <span>Blockchain</span>
+            </div>
+          </div>
+
+          <div class="tech-orbit reveal reveal--delay" aria-hidden="true">
+            <div class="orbit-core">
+              <span>AI</span>
+              <strong>Lead Signal</strong>
+            </div>
+            <div class="orbit-ring orbit-ring--one"></div>
+            <div class="orbit-ring orbit-ring--two"></div>
+            <div class="node node--one">Umsatz</div>
+            <div class="node node--two">Website</div>
+            <div class="node node--three">Timing</div>
+            <div class="node node--four">Stack</div>
+          </div>
+        </div>
+
+        <div class="section-stack reveal reveal--late">
+          <section class="company-band">
+            <div>
+              <p class="section-kicker">Was CPI für Unternehmen baut</p>
+              <h2>Technologie, die nicht nur gut aussieht, sondern Umsatz bewegt.</h2>
+            </div>
+            <p>
+              CPI Technologies entwickelt individuelle Software, AI-Automatisierungen,
+              Blockchain-Lösungen und Plattformen für Unternehmen, die schneller
+              validieren, effizienter arbeiten und neue digitale Umsatzkanäle starten
+              wollen.
+            </p>
+          </section>
+
+          <div class="capability-grid">
+            <article class="capability-card">
+              <span class="card-index">01</span>
+              <h3>AI-Agenten & Automatisierung</h3>
+              <p>Workflows, Support, Sales, interne Prozesse und Datenarbeit automatisieren.</p>
+            </article>
+            <article class="capability-card">
+              <span class="card-index">02</span>
+              <h3>SaaS & Plattformen</h3>
+              <p>Neue Produkte, Dashboards, Portale und digitale Services sauber entwickeln.</p>
+            </article>
+            <article class="capability-card">
+              <span class="card-index">03</span>
+              <h3>MCP, Integrationen & Daten</h3>
+              <p>Systeme verbinden, Daten nutzbar machen und AI direkt in Tools bringen.</p>
+            </article>
+            <article class="capability-card">
+              <span class="card-index">04</span>
+              <h3>Blockchain & Web3</h3>
+              <p>Tokenisierung, Smart Contracts und robuste Infrastruktur für neue Modelle.</p>
+            </article>
+          </div>
+
+          <section class="conversion-band">
+            <div>
+              <span class="pulse-dot"></span>
+              <p>Nach dem Check bekommt CPI die wichtigsten Projektsignale: Umsatz, Website, Ziel, Timing und Kontakt. So werden aus Klicks echte Gespräche.</p>
+            </div>
+            <button class="secondary-cta" type="button" data-start>Lead-Check starten</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen screen--quiz" id="quiz" data-screen="quiz" aria-live="polite">
+        <div class="quiz-shell">
+          <div class="quiz-progress">
+            <span id="stepLabel">Frage 1 von 6</span>
+            <div class="progress-track"><div id="progressBar"></div></div>
+          </div>
+          <div class="quiz-card">
+            <p class="eyebrow" id="questionKicker">Projektcheck</p>
+            <h2 id="questionTitle"></h2>
+            <p id="questionHint" class="question-hint"></p>
+            <div id="answerArea" class="answer-area"></div>
+            <div class="quiz-nav">
+              <button class="ghost-btn" type="button" id="backBtn">Zurück</button>
+              <button class="primary-cta primary-cta--compact" type="button" id="nextBtn">
+                Weiter
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+          <aside class="insight-panel">
+            <span>Live Signal</span>
+            <strong id="signalTitle">Projektprofil wird aufgebaut</strong>
+            <p id="signalText">Je präziser die Antworten, desto besser kann CPI das Potenzial einschätzen.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen screen--lead" id="lead" data-screen="lead">
+        <div class="lead-shell">
+          <div class="lead-copy">
+            <p class="eyebrow">Fast geschafft</p>
+            <h2>Jetzt kostenlose Prototyp-Einschätzung anfragen.</h2>
+            <p>
+              CPI erhält Ihr Projektprofil und kann schneller erkennen, ob ein
+              AI-Agent, eine Automatisierung, eine Plattform oder ein Software-Sprint
+              der richtige Hebel ist.
+            </p>
+            <div class="lead-summary" id="leadSummary"></div>
+          </div>
+          <form class="lead-form" id="leadForm">
+            <label>
+              Name
+              <input name="name" autocomplete="name" placeholder="Max Mustermann" required />
+            </label>
+            <label>
+              Business E-Mail
+              <input name="email" type="email" autocomplete="email" placeholder="max@unternehmen.de" required />
+            </label>
+            <label>
+              Unternehmen
+              <input name="company" autocomplete="organization" placeholder="Unternehmensname" required />
+            </label>
+            <label>
+              Telefon
+              <input name="phone" autocomplete="tel" placeholder="+49 ..." />
+            </label>
+            <button class="primary-cta form-submit" type="submit">
+              Prototyp-Einschätzung anfragen
+              <span aria-hidden="true">→</span>
+            </button>
+            <p class="form-note">Prototyp: Die Anfrage wird lokal im Browser gespeichert. Für Live-Betrieb CRM/Webhook anbinden.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="screen screen--done" id="done" data-screen="done">
+        <div class="done-card">
+          <p class="eyebrow">Lead qualifiziert</p>
+          <h2>Danke. Das Projektprofil ist bereit.</h2>
+          <p>
+            Im Live-Funnel würde diese Anfrage jetzt direkt in CRM, Slack oder
+            E-Mail laufen. Für Tests ist sie im Browser gespeichert.
+          </p>
+          <button class="secondary-cta" type="button" data-restart>Neuen Lead erfassen</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CPI Technologies | AI-Projekt Check</title>
+    <meta
+      name="description"
       content="Kurzer AI- und Software-Projektcheck von CPI Technologies. Website, Umsatz und Zielbild eintragen und eine technische Ersteinschaetzung anfragen."
     />
     <link rel="icon" href="assets/cpi-logo.svg" />
