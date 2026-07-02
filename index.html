@@ -22,6 +22,188 @@
       </a>
       <div class="topbar__status">
         <span></span>
+        SaaS Prototype
+      </div>
+    </header>
+
+    <main id="app">
+      <section class="screen screen--intro is-active" id="intro" data-screen="intro">
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <h1>Kostenloser Enterprise SaaS-Prototyp</h1>
+            <p class="hero-lead">
+              In 90 Sekunden prüfen lassen, ob aus Ihrem Unternehmen ein skalierbares
+              SaaS-Produkt entstehen kann. CPI analysiert Website, Umsatzsignal und
+              Geschäftsmodell und leitet daraus eine konkrete Prototyp-Richtung ab.
+            </p>
+            <div class="hero-actions">
+              <button class="primary-cta" type="button" data-start>
+                SaaS-Prototyp anfragen
+                <span aria-hidden="true">→</span>
+              </button>
+              <span class="microcopy">Kostenlos. Schnell. Für B2B-Unternehmen.</span>
+            </div>
+            <div class="signal-row" aria-label="CPI Leistungsbereiche">
+              <span>Website</span>
+              <span>Monatsumsatz</span>
+              <span>SaaS-Idee</span>
+            </div>
+          </div>
+
+          <div class="prototype-stage reveal reveal--delay" aria-hidden="true">
+            <div class="prototype-card prototype-card--main">
+              <div class="prototype-topline">
+                <span></span>
+                Enterprise SaaS Prototype
+              </div>
+              <div class="prototype-title">Revenue OS</div>
+              <div class="prototype-bars">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+              <div class="prototype-grid">
+                <b></b>
+                <b></b>
+                <b></b>
+                <b></b>
+              </div>
+            </div>
+            <div class="prototype-card prototype-card--mini prototype-card--one">Website Scan</div>
+            <div class="prototype-card prototype-card--mini prototype-card--two">Umsatzsignal</div>
+            <div class="prototype-card prototype-card--mini prototype-card--three">SaaS Use Case</div>
+            <div class="light-path light-path--one"></div>
+            <div class="light-path light-path--two"></div>
+          </div>
+        </div>
+
+        <div class="section-stack reveal reveal--late">
+          <section class="company-band">
+            <div>
+              <p class="section-kicker">Warum das konvertiert</p>
+              <h2>Ein konkreter Prototyp verkauft sich leichter als ein abstraktes Beratungsgespräch.</h2>
+            </div>
+            <p>
+              Der Funnel sammelt nur die wichtigsten Signale: Website, Monatsumsatz,
+              SaaS-Ziel, Ausgangslage und Timing. So bekommt CPI schnelle Leads mit
+              echtem Kontext.
+            </p>
+          </section>
+
+          <section class="conversion-band">
+            <div>
+              <span class="pulse-dot"></span>
+              <p>Der nächste Schritt: 6 kurze Fragen beantworten und den kostenlosen Enterprise SaaS-Prototyp anfragen.</p>
+            </div>
+            <button class="secondary-cta" type="button" data-start>Kostenlosen Prototyp prüfen</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen screen--quiz" id="quiz" data-screen="quiz" aria-live="polite">
+        <div class="quiz-shell">
+          <div class="quiz-progress">
+            <span id="stepLabel">Frage 1 von 6</span>
+            <div class="progress-track"><div id="progressBar"></div></div>
+          </div>
+          <div class="quiz-card">
+            <p class="eyebrow" id="questionKicker">SaaS-Prototyp</p>
+            <h2 id="questionTitle"></h2>
+            <p id="questionHint" class="question-hint"></p>
+            <div id="answerArea" class="answer-area"></div>
+            <div class="quiz-nav">
+              <button class="ghost-btn" type="button" id="backBtn">Zurück</button>
+              <button class="primary-cta primary-cta--compact" type="button" id="nextBtn">
+                Weiter
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+          <aside class="insight-panel">
+            <span>Live Signal</span>
+            <strong id="signalTitle">SaaS-Prototyp-Profil wird aufgebaut</strong>
+            <p id="signalText">Je präziser die Antworten, desto besser kann CPI das Potenzial einschätzen.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen screen--lead" id="lead" data-screen="lead">
+        <div class="lead-shell">
+          <div class="lead-copy">
+            <p class="eyebrow">Fast geschafft</p>
+            <h2>Jetzt kostenlosen SaaS-Prototyp anfragen.</h2>
+            <p>
+              CPI erhält Ihr Profil und kann einschätzen, welche SaaS-Richtung
+              für Ihr Unternehmen realistisch, verkaufbar und technisch sinnvoll ist.
+            </p>
+            <div class="lead-summary" id="leadSummary"></div>
+          </div>
+          <form class="lead-form" id="leadForm">
+            <label>
+              Name
+              <input name="name" autocomplete="name" placeholder="Max Mustermann" required />
+            </label>
+            <label>
+              Business E-Mail
+              <input name="email" type="email" autocomplete="email" placeholder="max@unternehmen.de" required />
+            </label>
+            <label>
+              Unternehmen
+              <input name="company" autocomplete="organization" placeholder="Unternehmensname" required />
+            </label>
+            <label>
+              Telefon
+              <input name="phone" autocomplete="tel" placeholder="+49 ..." />
+            </label>
+            <button class="primary-cta form-submit" type="submit">
+              Kostenlosen Prototyp anfragen
+              <span aria-hidden="true">→</span>
+            </button>
+            <p class="form-note">Prototyp: Die Anfrage wird lokal im Browser gespeichert. Für Live-Betrieb CRM/Webhook anbinden.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="screen screen--done" id="done" data-screen="done">
+        <div class="done-card">
+          <p class="eyebrow">Lead qualifiziert</p>
+          <h2>Danke. Das SaaS-Prototyp-Profil ist bereit.</h2>
+          <p>
+            Im Live-Funnel würde diese Anfrage jetzt direkt in CRM, Slack oder
+            E-Mail laufen. Für Tests ist sie im Browser gespeichert.
+          </p>
+          <button class="secondary-cta" type="button" data-restart>Neuen Lead erfassen</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kostenloser Enterprise SaaS-Prototyp | CPI Technologies</title>
+    <meta
+      name="description"
+      content="Kostenlosen Enterprise SaaS-Prototyp von CPI Technologies anfragen. Website, Umsatz und Zielbild eintragen und prüfen lassen."
+    />
+    <link rel="icon" href="assets/cpi-logo.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="cursor-light" aria-hidden="true"></div>
+    <div class="scanline" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#intro" aria-label="CPI Technologies Funnel Start">
+        <img src="assets/cpi-logo.svg" alt="CPI Technologies" />
+      </a>
+      <div class="topbar__status">
+        <span></span>
         Enterprise SaaS Prototype
       </div>
     </header>
