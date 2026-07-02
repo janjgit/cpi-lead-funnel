@@ -1,3 +1,7 @@
+document.addEventListener("pointermove", (event) => {
+  document.documentElement.style.setProperty("--x", `${event.clientX}px`);
+  document.documentElement.style.setProperty("--y", `${event.clientY}px`);
+});
 const screens = Array.from(document.querySelectorAll("[data-screen]"));
 const startButtons = document.querySelectorAll("[data-start]");
 const restartButtons = document.querySelectorAll("[data-restart]");
