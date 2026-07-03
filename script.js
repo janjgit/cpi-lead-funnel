@@ -14,6 +14,8 @@ const leadSummary = document.querySelector("#leadSummary");
 const leadForm = document.querySelector("#leadForm");
 const cookieBanner = document.querySelector("#cookieBanner");
 const cookieAccept = document.querySelector("#cookieAccept");
+const formSubmit = document.querySelector(".form-submit");
+const formNote = document.querySelector(".form-note");
 
 const questions = [
   {
@@ -232,17 +234,48 @@ function renderLeadSummary() {
     .join("");
 }
 
-function submitLead(event) {
+function setFormState(state, message) {
+  if (formNote) formNote.textContent = message;
+  if (!formSubmit) return;
+  formSubmit.disabled = state === "loading";
+  formSubmit.classList.toggle("is-loading", state === "loading");
+}
+
+async function submitLead(event) {
   event.preventDefault();
   const formData = new FormData(leadForm);
   const submission = {
     createdAt: new Date().toISOString(),
     answers,
-    lead: Object.fromEntries(formData.entries())
+    lead: Object.fromEntries(formData.entries()),
+    page: window.location.href
   };
-  localStorage.setItem("cpi-lead-funnel-submission", JSON.stringify(submission));
-  leadForm.reset();
-  showScreen("done");
+
+  setFormState("loading", "Ihre Anfrage wird sicher übertragen...");
+
+  try {
+    const response = await fetch("/api/lead", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(submission)
+    });
+
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) {
+      throw new Error(result.error || "Lead konnte nicht übertragen werden.");
+    }
+
+    localStorage.setItem("cpi-lead-funnel-submission", JSON.stringify(submission));
+    leadForm.reset();
+    showScreen("done");
+  } catch (error) {
+    setFormState(
+      "error",
+      "Die Übertragung ist gerade nicht möglich. Bitte prüfen Sie die CRM-Verbindung in Vercel."
+    );
+  }
 }
 
 function restart() {
