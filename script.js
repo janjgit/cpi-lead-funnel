@@ -21,50 +21,50 @@ const questions = [
   {
     id: "direction",
     kicker: "SaaS-Richtung",
-    title: "Welche SaaS-Richtung wäre für Ihr Unternehmen am spannendsten?",
-    hint: "Wählen Sie den Bereich, aus dem CPI eine konkrete Prototyp-Idee ableiten soll.",
+    title: "Welche Produkt-Richtung hätte für Ihr Unternehmen den größten Hebel?",
+    hint: "Wählen Sie den Bereich, in dem ein SaaS-Prototyp am schnellsten Wert sichtbar machen könnte.",
     type: "choice",
     options: [
       ["Kundenportal", "Ein digitaler Zugang für Kunden, Partner oder interne Teams."],
-      ["AI-SaaS", "Ein Produkt, das Prozesse automatisiert oder Entscheidungen unterstützt."],
-      ["Dashboard", "Daten, Reports oder Workflows als skalierbare Software verpacken."],
-      ["Noch offen", "CPI soll aus Website und Geschäftsmodell eine passende SaaS-Idee ableiten."]
+      ["AI-SaaS", "Ein Produkt, das Prozesse automatisiert oder Entscheidungen vorbereitet."],
+      ["Dashboard", "Daten, Reports oder Workflows als nutzbares Produkt verpacken."],
+      ["Noch offen", "CPI soll aus Website und Geschäftsmodell die beste Richtung ableiten."]
     ]
   },
   {
     id: "goal",
     kicker: "Business-Ziel",
-    title: "Was soll der Prototyp am Ende auslösen?",
-    hint: "Damit CPI nicht nur eine schöne Oberfläche baut, sondern einen echten Business-Hebel findet.",
+    title: "Was soll der Prototyp geschäftlich bewegen?",
+    hint: "So kann CPI priorisieren, ob Leadgenerierung, Automatisierung oder ein neues digitales Angebot im Vordergrund steht.",
     type: "choice",
     options: [
       ["Mehr Leads", "Ein klares digitales Angebot, das Interessenten schneller aktiviert."],
-      ["Automatisierung", "Weniger manuelle Arbeit, weniger Fehler, mehr Geschwindigkeit."],
-      ["Neue Umsätze", "Aus Know-how, Daten oder Services ein skalierbares Produkt bauen."],
-      ["Klarheit", "Schnell sehen, was technisch und wirtschaftlich Sinn ergibt."]
+      ["Automatisierung", "Manuelle Arbeit reduzieren und Prozesse belastbarer machen."],
+      ["Neue Umsätze", "Aus Know-how, Daten oder Services ein skalierbares Produkt entwickeln."],
+      ["Klarheit", "Schnell verstehen, welche Produktchance wirklich Sinn ergibt."]
     ]
   },
   {
     id: "revenue",
     kicker: "Umsatzsignal",
     title: "Wie hoch ist Ihr monatlicher Umsatz?",
-    hint: "Wichtig für Priorität, Projektpotenzial und die passende Prototyp-Tiefe.",
+    hint: "Dieses Signal hilft, Potenzial, Priorität und sinnvolle Prototyp-Tiefe realistisch einzuordnen.",
     type: "choice",
     options: [
       ["Unter 25.000 €", "Frühe Phase oder kleineres digitales Vorhaben."],
-      ["25.000 bis 100.000 €", "Wachstum vorhanden, Tech soll den nächsten Schritt bringen."],
-      ["100.000 bis 500.000 €", "Bestehende Nachfrage, Prozesse und Systeme müssen skalieren."],
-      ["Über 500.000 €", "Hoher Hebel für Automatisierung und digitale Produkte."]
+      ["25.000 bis 100.000 €", "Wachstum ist vorhanden, Tech soll den nächsten Schritt bringen."],
+      ["100.000 bis 500.000 €", "Bestehende Nachfrage, Prozesse und Systeme sollen skalieren."],
+      ["Über 500.000 €", "Hoher Hebel für Automatisierung, Plattformen und digitale Produkte."]
     ]
   },
   {
     id: "stage",
     kicker: "Ausgangslage",
     title: "Wie konkret ist die Idee bereits?",
-    hint: "So erkennt CPI, ob Strategie, Prototyping oder Umsetzung zuerst kommt.",
+    hint: "So erkennt CPI, ob zuerst Produktstrategie, Prototyping oder technische Umsetzung sinnvoll ist.",
     type: "choice",
     options: [
-      ["Noch keine Idee", "CPI soll aus Website und Geschäftsmodell eine SaaS-Chance ableiten."],
+      ["Noch keine Idee", "CPI soll aus Website und Geschäftsmodell eine Produktchance ableiten."],
       ["Erste Idee", "Es gibt ein Zielbild, aber noch keine klare Produktlogik."],
       ["Prototyp vorhanden", "Etwas existiert bereits und soll professioneller werden."],
       ["Bestehendes System", "Ein Tool, Portal oder Prozess soll zu einem besseren Produkt werden."]
@@ -74,10 +74,10 @@ const questions = [
     id: "timeline",
     kicker: "Timing",
     title: "Wann soll der Prototyp auf dem Tisch liegen?",
-    hint: "Ein klares Zeitfenster macht aus Interesse eine echte Anfrage.",
+    hint: "Ein klares Zeitfenster zeigt, wie dringend und konkret das Vorhaben bereits ist.",
     type: "choice",
     options: [
-      ["Sofort", "Wir wollen jetzt entscheiden und starten."],
+      ["Sofort", "Wir wollen kurzfristig entscheiden und loslegen."],
       ["In 30 Tagen", "Das Thema ist priorisiert und soll vorbereitet werden."],
       ["In 1 bis 3 Monaten", "Wir sammeln Optionen oder technische Klarheit."],
       ["Später", "Frühe Planung, aber mit echtem Interesse."]
@@ -87,7 +87,7 @@ const questions = [
     id: "website",
     kicker: "Website",
     title: "Wie lautet die Website Ihres Unternehmens?",
-    hint: "Pflichtfrage: Daraus kann CPI Angebot, Branche und SaaS-Potenzial schneller einordnen.",
+    hint: "Darüber kann CPI Angebot, Branche, Zielgruppe und mögliches SaaS-Potenzial schneller einordnen.",
     type: "url",
     placeholder: "https://ihr-unternehmen.de"
   }
