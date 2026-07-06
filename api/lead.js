@@ -36,6 +36,59 @@ function validatePayload(payload) {
   return "";
 }
 
+function buildWebhookUrls(webhookUrl, apiKey) {
+  if (!apiKey) return [webhookUrl];
+
+  const urls = [webhookUrl];
+  const queryNames = ["api_key", "apikey", "apiKey", "key", "token"];
+
+  for (const name of queryNames) {
+    try {
+      const url = new URL(webhookUrl);
+      url.searchParams.set(name, apiKey);
+      urls.push(url.toString());
+    } catch {
+      // Keep the original webhook URL if URL parsing ever fails.
+    }
+  }
+
+  return [...new Set(urls)];
+}
+
+function buildWebhookAttempts(webhookUrl, apiKey) {
+  const baseHeaders = {
+    "Content-Type": "application/json"
+  };
+
+  const attempts = buildWebhookUrls(webhookUrl, apiKey).map((url) => ({
+    label: url === webhookUrl ? "default" : "query-api-key",
+    url,
+    headers: baseHeaders
+  }));
+
+  if (apiKey) {
+    attempts.push(
+      {
+        label: "x-api-key",
+        url: webhookUrl,
+        headers: { ...baseHeaders, "X-API-Key": apiKey }
+      },
+      {
+        label: "x-make-apikey",
+        url: webhookUrl,
+        headers: { ...baseHeaders, "X-Make-Api-Key": apiKey }
+      },
+      {
+        label: "api-key",
+        url: webhookUrl,
+        headers: { ...baseHeaders, "Api-Key": apiKey }
+      }
+    );
+  }
+
+  return attempts;
+}
+
 export default async function handler(request, response) {
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
@@ -74,36 +127,40 @@ export default async function handler(request, response) {
   };
 
   try {
-    const headers = {
-      "Content-Type": "application/json"
-    };
+    let lastError = null;
+    const attempts = buildWebhookAttempts(webhookUrl, apiKey);
 
-    if (apiKey) {
-      headers["X-API-Key"] = apiKey;
-    }
+    for (const attempt of attempts) {
+      const crmResponse = await fetch(attempt.url, {
+        method: "POST",
+        headers: attempt.headers,
+        body: JSON.stringify({
+          ...crmPayload,
+          authAttempt: attempt.label
+        })
+      });
 
-    const crmResponse = await fetch(webhookUrl, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(crmPayload)
-    });
+      if (crmResponse.ok) {
+        json(response, 200, { ok: true });
+        return;
+      }
 
-    if (!crmResponse.ok) {
       const errorBody = await crmResponse.text().catch(() => "");
-      console.error("CRM webhook failed", {
+      lastError = {
+        attempt: attempt.label,
         status: crmResponse.status,
         statusText: crmResponse.statusText,
         body: errorBody.slice(0, 500)
-      });
+      };
 
-      json(response, 502, {
-        ok: false,
-        error: `CRM/Webhook hat mit Status ${crmResponse.status} geantwortet.`
-      });
-      return;
+      if (![401, 403].includes(crmResponse.status)) break;
     }
 
-    json(response, 200, { ok: true });
+    console.error("CRM webhook failed", lastError);
+    json(response, 502, {
+      ok: false,
+      error: `CRM/Webhook hat mit Status ${lastError?.status || "unbekannt"} geantwortet.`
+    });
   } catch (error) {
     console.error("CRM webhook request error", {
       message: error?.message || "Unknown error"
