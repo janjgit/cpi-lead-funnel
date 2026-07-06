@@ -21,26 +21,26 @@ const questions = [
   {
     id: "direction",
     kicker: "SaaS-Richtung",
-    title: "Welche Produkt-Richtung hätte für Ihr Unternehmen den größten Hebel?",
-    hint: "Wählen Sie den Bereich, in dem ein SaaS-Prototyp am schnellsten Wert sichtbar machen könnte.",
+    title: "Wo könnte ein SaaS-Prototyp für Ihr Unternehmen den größten Hebel haben?",
+    hint: "Wählen Sie den Bereich, in dem CPI am schnellsten eine verwertbare Produktchance sichtbar machen könnte.",
     type: "choice",
     options: [
       ["Kundenportal", "Ein digitaler Zugang für Kunden, Partner oder interne Teams."],
       ["AI-SaaS", "Ein Produkt, das Prozesse automatisiert oder Entscheidungen vorbereitet."],
       ["Dashboard", "Daten, Reports oder Workflows als nutzbares Produkt verpacken."],
-      ["Noch offen", "CPI soll aus Website und Geschäftsmodell die beste Richtung ableiten."]
+      ["Noch offen", "CPI soll aus Website, Umsatzsignal und Geschäftsmodell die beste Richtung ableiten."]
     ]
   },
   {
     id: "goal",
     kicker: "Business-Ziel",
     title: "Was soll der Prototyp geschäftlich bewegen?",
-    hint: "So kann CPI priorisieren, ob Leadgenerierung, Automatisierung oder ein neues digitales Angebot im Vordergrund steht.",
+    hint: "So priorisiert CPI, ob Leadgenerierung, Automatisierung oder ein neues digitales Angebot im Vordergrund steht.",
     type: "choice",
     options: [
       ["Mehr Leads", "Ein klares digitales Angebot, das Interessenten schneller aktiviert."],
       ["Automatisierung", "Manuelle Arbeit reduzieren und Prozesse belastbarer machen."],
-      ["Neue Umsätze", "Aus Know-how, Daten oder Services ein skalierbares Produkt entwickeln."],
+      ["Neue Umsätze", "Aus Know-how, Daten oder Services ein skalierbares digitales Produkt entwickeln."],
       ["Klarheit", "Schnell verstehen, welche Produktchance wirklich Sinn ergibt."]
     ]
   },
@@ -48,7 +48,7 @@ const questions = [
     id: "revenue",
     kicker: "Umsatzsignal",
     title: "Wie hoch ist Ihr monatlicher Umsatz?",
-    hint: "Dieses Signal hilft, Potenzial, Priorität und sinnvolle Prototyp-Tiefe realistisch einzuordnen.",
+    hint: "Dieses Signal hilft CPI, Potenzial, Priorität und sinnvolle Prototyp-Tiefe realistisch einzuordnen.",
     type: "choice",
     options: [
       ["Unter 25.000 €", "Frühe Phase oder kleineres digitales Vorhaben."],
@@ -87,7 +87,7 @@ const questions = [
     id: "website",
     kicker: "Website",
     title: "Wie lautet die Website Ihres Unternehmens?",
-    hint: "Darüber kann CPI Angebot, Branche, Zielgruppe und mögliches SaaS-Potenzial schneller einordnen.",
+    hint: "Darüber kann CPI Angebot, Branche, Zielgruppe und SaaS-Potenzial schneller einordnen.",
     type: "url",
     placeholder: "https://ihr-unternehmen.de"
   }
@@ -273,7 +273,7 @@ async function submitLead(event) {
   } catch (error) {
     setFormState(
       "error",
-      "Die Übertragung ist gerade nicht möglich. Bitte prüfen Sie die CRM-Verbindung in Vercel."
+      "Die Übertragung ist gerade nicht möglich. Bitte versuchen Sie es in einem Moment erneut."
     );
   }
 }
