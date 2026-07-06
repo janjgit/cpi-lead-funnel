@@ -298,8 +298,11 @@ h1 {
   box-shadow: 0 22px 58px rgba(30, 217, 255, 0.24), inset 0 1px rgba(255, 255, 255, 0.42);
   font-size: clamp(17px, 1.4vw, 22px);
   font-weight: 900;
+  line-height: 1.15;
   letter-spacing: 0;
+  text-align: center;
   transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+  white-space: normal;
   overflow: hidden;
 }
 
@@ -324,6 +327,15 @@ h1 {
   transform: translateX(115%);
 }
 
+.primary-cta:focus-visible,
+.secondary-cta:focus-visible,
+.back-link:focus-visible,
+.answer-btn:focus-visible,
+.cookie-banner button:focus-visible {
+  outline: 3px solid rgba(93, 240, 177, 0.9);
+  outline-offset: 4px;
+}
+
 .primary-cta > *,
 .secondary-cta > * {
   position: relative;
@@ -342,6 +354,7 @@ h1 {
 .primary-cta svg,
 .secondary-cta svg,
 .back-link svg {
+  flex: 0 0 24px;
   width: 24px;
   height: 24px;
   fill: none;
@@ -1298,6 +1311,7 @@ h1 {
     width: 100%;
     min-height: 64px;
     padding: 0 20px;
+    gap: 12px;
     font-size: 16px;
   }
 
