@@ -51,6 +51,7 @@ export default async function handler(request, response) {
   }
 
   const webhookUrl = process.env.CRM_WEBHOOK_URL;
+  const apiKey = process.env.CRM_API_KEY;
   if (!webhookUrl) {
     json(response, 500, {
       ok: false,
@@ -70,11 +71,18 @@ export default async function handler(request, response) {
   };
 
   try {
+    const headers = {
+      "Content-Type": "application/json"
+    };
+
+    if (apiKey) {
+      headers.Authorization = `Bearer ${apiKey}`;
+      headers["X-API-Key"] = apiKey;
+    }
+
     const crmResponse = await fetch(webhookUrl, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers,
       body: JSON.stringify(crmPayload)
     });
 
