@@ -76,7 +76,7 @@ function buildWebhookAttempts(webhookUrl, apiKey) {
       {
         label: "x-make-apikey",
         url: webhookUrl,
-        headers: { ...baseHeaders, "X-Make-Api-Key": apiKey }
+        headers: { ...baseHeaders, "x-make-apikey": apiKey }
       },
       {
         label: "api-key",
