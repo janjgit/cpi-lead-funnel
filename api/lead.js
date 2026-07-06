@@ -66,6 +66,8 @@ export default async function handler(request, response) {
     lead: payload.lead,
     qualification: payload.answers,
     apiKey: apiKey || "",
+    api_key: apiKey || "",
+    apiKeyValue: apiKey || "",
     page: payload.page || "",
     userAgent: request.headers["user-agent"] || "",
     referrer: request.headers.referer || ""
@@ -75,6 +77,10 @@ export default async function handler(request, response) {
     const headers = {
       "Content-Type": "application/json"
     };
+
+    if (apiKey) {
+      headers["X-API-Key"] = apiKey;
+    }
 
     const crmResponse = await fetch(webhookUrl, {
       method: "POST",
