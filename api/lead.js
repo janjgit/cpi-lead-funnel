@@ -76,11 +76,6 @@ export default async function handler(request, response) {
       "Content-Type": "application/json"
     };
 
-    if (apiKey) {
-      headers.Authorization = `Bearer ${apiKey}`;
-      headers["X-API-Key"] = apiKey;
-    }
-
     const crmResponse = await fetch(webhookUrl, {
       method: "POST",
       headers,
