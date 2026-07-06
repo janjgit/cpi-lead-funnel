@@ -65,6 +65,7 @@ export default async function handler(request, response) {
     submittedAt: new Date().toISOString(),
     lead: payload.lead,
     qualification: payload.answers,
+    apiKey: apiKey || "",
     page: payload.page || "",
     userAgent: request.headers["user-agent"] || "",
     referrer: request.headers.referer || ""
@@ -87,6 +88,13 @@ export default async function handler(request, response) {
     });
 
     if (!crmResponse.ok) {
+      const errorBody = await crmResponse.text().catch(() => "");
+      console.error("CRM webhook failed", {
+        status: crmResponse.status,
+        statusText: crmResponse.statusText,
+        body: errorBody.slice(0, 500)
+      });
+
       json(response, 502, {
         ok: false,
         error: `CRM/Webhook hat mit Status ${crmResponse.status} geantwortet.`
@@ -96,6 +104,10 @@ export default async function handler(request, response) {
 
     json(response, 200, { ok: true });
   } catch (error) {
+    console.error("CRM webhook request error", {
+      message: error?.message || "Unknown error"
+    });
+
     json(response, 502, {
       ok: false,
       error: "Lead konnte nicht an das CRM übertragen werden."
