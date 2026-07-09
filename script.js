@@ -242,6 +242,9 @@ function setFormState(state, message) {
 }
 
 function trackLeadConversion() {
+  if (window.__cpiLeadTracked) return;
+  window.__cpiLeadTracked = true;
+
   if (typeof window.fbq === "function") {
     window.fbq("track", "Lead", {
       content_name: "Kostenloser Enterprise SaaS-Prototyp",
@@ -250,6 +253,12 @@ function trackLeadConversion() {
   }
 
   if (typeof window.gtag === "function") {
+    window.gtag("event", "lead", {
+      send_to: "AW-350722464",
+      event_category: "Lead Funnel",
+      event_label: "Kostenloser Enterprise SaaS-Prototyp"
+    });
+
     window.gtag("event", "conversion", {
       send_to: "AW-350722464"
     });
@@ -267,6 +276,7 @@ async function submitLead(event) {
   };
 
   setFormState("loading", "Ihre Anfrage wird sicher übertragen...");
+  trackLeadConversion();
 
   try {
     const response = await fetch("/api/lead", {
@@ -283,7 +293,6 @@ async function submitLead(event) {
     }
 
     localStorage.setItem("cpi-lead-funnel-submission", JSON.stringify(submission));
-    trackLeadConversion();
     leadForm.reset();
     showScreen("done");
   } catch (error) {
