@@ -241,6 +241,14 @@ function setFormState(state, message) {
   formSubmit.classList.toggle("is-loading", state === "loading");
 }
 
+function trackLeadConversion() {
+  if (typeof window.fbq !== "function") return;
+  window.fbq("track", "Lead", {
+    content_name: "Kostenloser Enterprise SaaS-Prototyp",
+    content_category: "Lead Funnel"
+  });
+}
+
 async function submitLead(event) {
   event.preventDefault();
   const formData = new FormData(leadForm);
@@ -268,6 +276,7 @@ async function submitLead(event) {
     }
 
     localStorage.setItem("cpi-lead-funnel-submission", JSON.stringify(submission));
+    trackLeadConversion();
     leadForm.reset();
     showScreen("done");
   } catch (error) {
