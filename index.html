@@ -24,7 +24,9 @@
       t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,
       document,'script','https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '2154388281488546');
-      fbq('track', 'PageView');
+      window.addEventListener('load', function() {
+        fbq('trackSingle', '2154388281488546', 'PageView');
+      });
     </script>
   </head>
   <body>
