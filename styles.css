@@ -897,8 +897,9 @@ h1 {
 }
 
 .quiz-shell {
-  max-width: 980px;
-  padding: clamp(24px, 5vw, 58px);
+  width: min(100%, 920px);
+  max-width: 920px;
+  padding: clamp(24px, 4vw, 46px);
 }
 
 .quiz-top {
@@ -946,31 +947,36 @@ h1 {
 }
 
 .question-stage {
-  padding-top: clamp(34px, 7vw, 74px);
+  padding-top: clamp(24px, 4.5vw, 46px);
 }
 
 .question-stage h2 {
-  margin-bottom: 20px;
+  max-width: 760px;
+  margin-bottom: 16px;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.04;
+  letter-spacing: 0;
 }
 
 .question-hint {
-  max-width: 760px;
-  margin-bottom: 34px;
-  font-size: clamp(17px, 2vw, 24px);
+  max-width: 700px;
+  margin-bottom: 26px;
+  font-size: clamp(16px, 1.45vw, 19px);
+  line-height: 1.55;
 }
 
 .answer-area {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .answer-btn {
   display: grid;
-  gap: 10px;
-  min-height: 132px;
-  padding: 22px;
+  gap: 8px;
+  min-height: 108px;
+  padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 18px;
   color: var(--text);
@@ -1004,13 +1010,13 @@ h1 {
 }
 
 .answer-btn strong {
-  font-size: clamp(18px, 2vw, 24px);
-  line-height: 1.1;
+  font-size: clamp(17px, 1.45vw, 20px);
+  line-height: 1.16;
 }
 
 .answer-btn span {
   color: var(--muted);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 650;
   line-height: 1.45;
 }
@@ -1024,14 +1030,14 @@ h1 {
 .input-step input,
 .lead-form input {
   width: 100%;
-  min-height: 66px;
+  min-height: 60px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 14px;
   outline: none;
   color: var(--text);
   background: rgba(255, 255, 255, 0.07);
   padding: 0 18px;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 750;
 }
 
