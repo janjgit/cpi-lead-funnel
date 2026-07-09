@@ -246,7 +246,7 @@ function trackLeadConversion() {
   window.__cpiLeadTracked = true;
 
   if (typeof window.fbq === "function") {
-    window.fbq("trackSingle", "2154388281488546", "Lead", {
+    window.fbq("track", "Lead", {
       content_name: "Kostenloser Enterprise SaaS-Prototyp",
       content_category: "Lead Funnel"
     });
