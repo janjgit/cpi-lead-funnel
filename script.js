@@ -242,11 +242,18 @@ function setFormState(state, message) {
 }
 
 function trackLeadConversion() {
-  if (typeof window.fbq !== "function") return;
-  window.fbq("track", "Lead", {
-    content_name: "Kostenloser Enterprise SaaS-Prototyp",
-    content_category: "Lead Funnel"
-  });
+  if (typeof window.fbq === "function") {
+    window.fbq("track", "Lead", {
+      content_name: "Kostenloser Enterprise SaaS-Prototyp",
+      content_category: "Lead Funnel"
+    });
+  }
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", "conversion", {
+      send_to: "AW-350722464"
+    });
+  }
 }
 
 async function submitLead(event) {
