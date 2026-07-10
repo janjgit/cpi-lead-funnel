@@ -1,5 +1,11 @@
 const REQUIRED_LEAD_FIELDS = ["name", "email", "company"];
 const REQUIRED_ANSWER_FIELDS = ["direction", "goal", "revenue", "stage", "timeline", "website"];
+const DEFAULT_META_PIXEL_ID = "2154388281488546";
+
+async function sha256(value) {
+  const { createHash } = await import("node:crypto");
+  return createHash("sha256").update(String(value || "").trim().toLowerCase()).digest("hex");
+}
 
 function json(response, status, payload) {
   response.statusCode = status;
@@ -89,6 +95,86 @@ function buildWebhookAttempts(webhookUrl, apiKey) {
   return attempts;
 }
 
+function getClientIp(request) {
+  const forwardedFor = request.headers["x-forwarded-for"];
+  if (typeof forwardedFor === "string" && forwardedFor) {
+    return forwardedFor.split(",")[0].trim();
+  }
+
+  return request.headers["x-real-ip"] || request.socket?.remoteAddress || "";
+}
+
+async function sendMetaLeadEvent(request, payload) {
+  const accessToken = process.env.META_ACCESS_TOKEN;
+  const pixelId = process.env.META_PIXEL_ID || DEFAULT_META_PIXEL_ID;
+  if (!accessToken || !pixelId) return;
+
+  const lead = payload.lead || {};
+  const tracking = payload.tracking || {};
+  const eventId =
+    tracking.metaEventId || `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
+  const userData = {
+    client_ip_address: getClientIp(request),
+    client_user_agent: request.headers["user-agent"] || "",
+    em: lead.email ? [await sha256(lead.email)] : undefined,
+    ph: lead.phone ? [await sha256(lead.phone.replace(/[^\d+]/g, ""))] : undefined,
+    fn: lead.name ? [await sha256(String(lead.name).split(" ")[0] || "")] : undefined,
+    ln: lead.name ? [await sha256(String(lead.name).split(" ").slice(1).join(" ") || "")] : undefined,
+    fbp: tracking.fbp || undefined,
+    fbc: tracking.fbc || undefined
+  };
+
+  Object.keys(userData).forEach((key) => {
+    if (!userData[key] || (Array.isArray(userData[key]) && !userData[key][0])) {
+      delete userData[key];
+    }
+  });
+
+  const metaPayload = {
+    data: [
+      {
+        event_name: "Lead",
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: eventId,
+        action_source: "website",
+        event_source_url: payload.page || "https://cpi-lead-funnel.vercel.app",
+        user_data: userData,
+        custom_data: {
+          content_name: "Kostenloser Enterprise SaaS-Prototyp",
+          content_category: "Lead Funnel",
+          company: lead.company || "",
+          qualification_direction: payload.answers?.direction || "",
+          qualification_revenue: payload.answers?.revenue || ""
+        }
+      }
+    ]
+  };
+
+  if (process.env.META_TEST_EVENT_CODE) {
+    metaPayload.test_event_code = process.env.META_TEST_EVENT_CODE;
+  }
+
+  const metaResponse = await fetch(
+    `https://graph.facebook.com/v20.0/${pixelId}/events?access_token=${encodeURIComponent(accessToken)}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(metaPayload)
+    }
+  );
+
+  if (!metaResponse.ok) {
+    const errorBody = await metaResponse.text().catch(() => "");
+    console.error("Meta CAPI failed", {
+      status: metaResponse.status,
+      body: errorBody.slice(0, 500)
+    });
+  }
+}
+
 export default async function handler(request, response) {
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
@@ -127,6 +213,12 @@ export default async function handler(request, response) {
   };
 
   try {
+    await sendMetaLeadEvent(request, payload).catch((error) => {
+      console.error("Meta CAPI request error", {
+        message: error?.message || "Unknown error"
+      });
+    });
+
     let lastError = null;
     const attempts = buildWebhookAttempts(webhookUrl, apiKey);
 
