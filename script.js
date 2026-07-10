@@ -256,6 +256,10 @@ function trackLeadConversion() {
     });
   }
 
+  if (typeof window.cpiMetaBeacon === "function") {
+    window.cpiMetaBeacon("Lead", window.__cpiLeadEventId);
+  }
+
   if (typeof window.gtag === "function") {
     window.gtag("event", "lead", {
       send_to: "AW-350722464",

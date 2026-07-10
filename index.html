@@ -37,6 +37,19 @@
       }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '2154388281488546');
       fbq('trackSingle', '2154388281488546', 'PageView');
+      window.cpiMetaBeacon = function(eventName, eventId) {
+        var params = new URLSearchParams({
+          id: '2154388281488546',
+          ev: eventName,
+          dl: window.location.href,
+          rl: document.referrer || '',
+          if: 'false',
+          ts: String(Date.now())
+        });
+        if (eventId) params.set('eid', eventId);
+        new Image().src = 'https://www.facebook.com/tr/?' + params.toString();
+      };
+      window.cpiMetaBeacon('PageView');
     </script>
     <!-- End Meta Pixel Code -->
   </head>
@@ -311,8 +324,8 @@
       <div>
         <strong>Cookie-Hinweis</strong>
         <p>
-          Wir speichern nur technische Basisdaten und nutzen Meta/Google-Events für die Optimierung
-          unseres Lead-Funnels. Mit Klick auf „Verstanden“ bestätigen Sie die Zustimmung.
+          Tracking ist aktiv: Meta PageView, Google Tag und Lead-Events werden zur
+          Optimierung dieses Funnels genutzt. Mit Klick auf „Verstanden“ bestätigen Sie die Zustimmung.
         </p>
       </div>
       <button type="button" id="cookieAccept">Verstanden</button>
