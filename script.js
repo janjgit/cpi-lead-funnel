@@ -16,6 +16,7 @@ const cookieBanner = document.querySelector("#cookieBanner");
 const cookieAccept = document.querySelector("#cookieAccept");
 const formSubmit = document.querySelector(".form-submit");
 const formNote = document.querySelector(".form-note");
+const metaPixelId = window.cpiMetaPixelId || "2154388281488546";
 
 const questions = [
   {
@@ -241,16 +242,28 @@ function setFormState(state, message) {
   formSubmit.classList.toggle("is-loading", state === "loading");
 }
 
+function trackMetaEvent(eventName, params = {}) {
+  if (typeof window.fbq !== "function") return;
+  window.fbq("track", eventName, params);
+}
+
+function confirmMetaPageView() {
+  if (window.__cpiMetaPageViewConfirmed) return;
+  window.__cpiMetaPageViewConfirmed = true;
+  setTimeout(() => {
+    trackMetaEvent("PageView");
+  }, 700);
+}
+
 function trackLeadConversion() {
   if (window.__cpiLeadTracked) return;
   window.__cpiLeadTracked = true;
 
-  if (typeof window.fbq === "function") {
-    window.fbq("trackSingle", window.cpiMetaPixelId || "2154388281488546", "Lead", {
-      content_name: "Kostenloser Enterprise SaaS-Prototyp",
-      content_category: "Lead Funnel"
-    });
-  }
+  trackMetaEvent("Lead", {
+    content_name: "Kostenloser Enterprise SaaS-Prototyp",
+    content_category: "Lead Funnel",
+    pixel_id: metaPixelId
+  });
 
   if (typeof window.gtag === "function") {
     window.gtag("event", "lead", {
@@ -334,4 +347,5 @@ backBtn.addEventListener("click", previousQuestion);
 leadForm.addEventListener("submit", submitLead);
 
 renderQuestion();
+confirmMetaPageView();
 initCookieBanner();
