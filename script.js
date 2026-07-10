@@ -16,7 +16,6 @@ const cookieBanner = document.querySelector("#cookieBanner");
 const cookieAccept = document.querySelector("#cookieAccept");
 const formSubmit = document.querySelector(".form-submit");
 const formNote = document.querySelector(".form-note");
-const metaPixelId = window.cpiMetaPixelId || "2154388281488546";
 
 const questions = [
   {
@@ -242,28 +241,16 @@ function setFormState(state, message) {
   formSubmit.classList.toggle("is-loading", state === "loading");
 }
 
-function trackMetaEvent(eventName, params = {}) {
-  if (typeof window.fbq !== "function") return;
-  window.fbq("track", eventName, params);
-}
-
-function confirmMetaPageView() {
-  if (window.__cpiMetaPageViewConfirmed) return;
-  window.__cpiMetaPageViewConfirmed = true;
-  setTimeout(() => {
-    trackMetaEvent("PageView");
-  }, 700);
-}
-
 function trackLeadConversion() {
   if (window.__cpiLeadTracked) return;
   window.__cpiLeadTracked = true;
 
-  trackMetaEvent("Lead", {
-    content_name: "Kostenloser Enterprise SaaS-Prototyp",
-    content_category: "Lead Funnel",
-    pixel_id: metaPixelId
-  });
+  if (typeof window.fbq === "function") {
+    window.fbq("track", "Lead", {
+      content_name: "Kostenloser Enterprise SaaS-Prototyp",
+      content_category: "Lead Funnel"
+    });
+  }
 
   if (typeof window.gtag === "function") {
     window.gtag("event", "lead", {
@@ -324,7 +311,8 @@ function restart() {
 }
 
 function initCookieBanner() {
-  if (localStorage.getItem("cpi-cookie-consent") === "accepted") {
+  const consent = localStorage.getItem("cpi-cookie-consent");
+  if (consent === "accepted") {
     cookieBanner?.classList.add("is-hidden");
     return;
   }
@@ -333,6 +321,12 @@ function initCookieBanner() {
     localStorage.setItem("cpi-cookie-consent", "accepted");
     cookieBanner.classList.add("is-hidden");
   });
+
+  window.setTimeout(() => {
+    if (cookieBanner && !cookieBanner.classList.contains("is-hidden")) {
+      cookieBanner.classList.add("is-hidden");
+    }
+  }, 45000);
 }
 
 document.addEventListener("pointermove", (event) => {
@@ -347,5 +341,4 @@ backBtn.addEventListener("click", previousQuestion);
 leadForm.addEventListener("submit", submitLead);
 
 renderQuestion();
-confirmMetaPageView();
 initCookieBanner();
