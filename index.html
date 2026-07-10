@@ -17,16 +17,28 @@
       gtag('js', new Date());
       gtag('config', 'AW-350722464');
     </script>
+    <!-- Meta Pixel Code -->
     <script>
-      window.cpiMetaPixelId = '2154388281488546';
-      !(function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)})(window,
-      document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', window.cpiMetaPixelId);
+      !function(f,b,e,v,n,t,s){
+        if(f.fbq) return;
+        n=f.fbq=function(){
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if(!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '2154388281488546');
       fbq('track', 'PageView');
     </script>
+    <!-- End Meta Pixel Code -->
   </head>
   <body>
     <noscript>
@@ -299,8 +311,8 @@
       <div>
         <strong>Cookie-Hinweis</strong>
         <p>
-          Dieser Funnel nutzt technisch notwendige lokale Speicherung, damit die Anfrage
-          verarbeitet und der Lead-Flow abgeschlossen werden kann.
+          Wir speichern nur technische Basisdaten und nutzen Meta/Google-Events für die Optimierung
+          unseres Lead-Funnels. Mit Klick auf „Verstanden“ bestätigen Sie die Zustimmung.
         </p>
       </div>
       <button type="button" id="cookieAccept">Verstanden</button>
