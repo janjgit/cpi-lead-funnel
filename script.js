@@ -242,13 +242,17 @@ function setFormState(state, message) {
 }
 
 function trackLeadConversion() {
-  if (window.__cpiLeadTracked) return;
+  if (window.__cpiLeadTracked) return window.__cpiLeadEventId;
   window.__cpiLeadTracked = true;
+  window.__cpiLeadEventId =
+    window.crypto?.randomUUID?.() || `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
   if (typeof window.fbq === "function") {
     window.fbq("trackSingle", "2154388281488546", "Lead", {
       content_name: "Kostenloser Enterprise SaaS-Prototyp",
       content_category: "Lead Funnel"
+    }, {
+      eventID: window.__cpiLeadEventId
     });
   }
 
@@ -263,6 +267,15 @@ function trackLeadConversion() {
       send_to: "AW-350722464/_N81COLb5KkcEKCznqcB"
     });
   }
+
+  return window.__cpiLeadEventId;
+}
+
+function readCookie(name) {
+  const match = document.cookie
+    .split("; ")
+    .find((cookie) => cookie.startsWith(`${name}=`));
+  return match ? decodeURIComponent(match.split("=").slice(1).join("=")) : "";
 }
 
 async function submitLead(event) {
@@ -276,7 +289,7 @@ async function submitLead(event) {
   };
 
   setFormState("loading", "Ihre Anfrage wird sicher übertragen...");
-  trackLeadConversion();
+  const metaEventId = trackLeadConversion();
 
   try {
     const response = await fetch("/api/lead", {
@@ -284,7 +297,14 @@ async function submitLead(event) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(submission)
+      body: JSON.stringify({
+        ...submission,
+        tracking: {
+          metaEventId,
+          fbp: readCookie("_fbp"),
+          fbc: readCookie("_fbc")
+        }
+      })
     });
 
     const result = await response.json().catch(() => ({}));
