@@ -1250,6 +1250,7 @@ h1 {
 
 .start-hero,
 .start-strip,
+.founder-card,
 .start-body,
 .start-final {
   position: relative;
@@ -1263,6 +1264,7 @@ h1 {
 }
 
 .start-hero::before,
+.founder-card::before,
 .start-body::before,
 .start-final::before {
   position: absolute;
@@ -1288,6 +1290,7 @@ h1 {
 .start-copy,
 .start-panel,
 .start-strip > *,
+.founder-card > *,
 .start-body > *,
 .start-final > * {
   position: relative;
@@ -1486,6 +1489,89 @@ h1 {
   font-size: 14.5px;
   font-weight: 680;
   line-height: 1.45;
+}
+
+.founder-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.68fr);
+  gap: clamp(18px, 3.2vw, 38px);
+  align-items: center;
+  padding: clamp(22px, 3.8vw, 42px);
+}
+
+.founder-copy h2 {
+  max-width: 740px;
+  margin-bottom: 12px;
+  color: #f7fbff;
+  font-size: clamp(27px, 3.2vw, 42px);
+  font-weight: 950;
+  line-height: 1.06;
+}
+
+.founder-copy p {
+  max-width: 760px;
+  margin-bottom: 0;
+  color: #c3cedc;
+  font-size: clamp(15.5px, 1.25vw, 18px);
+  font-weight: 650;
+  line-height: 1.52;
+}
+
+.founder-signal {
+  display: grid;
+  gap: 10px;
+}
+
+.founder-signal div {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  min-height: 84px;
+  padding: 17px 18px;
+  overflow: hidden;
+  border: 1px solid rgba(93, 240, 177, 0.18);
+  border-radius: 16px;
+  background:
+    linear-gradient(90deg, rgba(30, 217, 255, 0.09), rgba(255, 255, 255, 0.045)),
+    rgba(255, 255, 255, 0.035);
+}
+
+.founder-signal div::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transform: translateX(-115%);
+  animation: glassSweep 5.8s ease-in-out infinite;
+}
+
+.founder-signal div:nth-child(2)::after {
+  animation-delay: 0.24s;
+}
+
+.founder-signal div:nth-child(3)::after {
+  animation-delay: 0.48s;
+}
+
+.founder-signal strong,
+.founder-signal span {
+  position: relative;
+  z-index: 1;
+}
+
+.founder-signal strong {
+  color: #f8fbff;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 950;
+  line-height: 0.98;
+}
+
+.founder-signal span {
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .start-body {
@@ -1900,6 +1986,7 @@ h1 {
 
 @media (max-width: 980px) {
   .start-hero,
+  .founder-card,
   .start-body {
     grid-template-columns: 1fr;
   }
@@ -1920,6 +2007,7 @@ h1 {
   }
 
   .start-hero,
+  .founder-card,
   .start-body,
   .start-final {
     border-radius: 18px;
@@ -1981,8 +2069,22 @@ h1 {
   }
 
   .start-explain h2,
+  .founder-copy h2,
   .start-final h2 {
     font-size: clamp(26px, 7.8vw, 36px);
+  }
+
+  .founder-signal {
+    gap: 9px;
+  }
+
+  .founder-signal div {
+    min-height: auto;
+    padding: 15px;
+  }
+
+  .founder-signal strong {
+    font-size: clamp(26px, 8vw, 34px);
   }
 
   .mini-cards article {
