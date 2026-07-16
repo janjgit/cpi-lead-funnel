@@ -21,73 +21,73 @@ const questions = [
   {
     id: "direction",
     kicker: "SaaS-Richtung",
-    title: "Wo steckt in Ihrem Unternehmen vermutlich der größte SaaS-Hebel?",
-    hint: "Wählen Sie den Bereich, aus dem CPI am schnellsten eine konkrete Prototyp-Chance ableiten soll.",
+    title: "Was soll aus Ihrem Unternehmen als digitales Produkt entstehen?",
+    hint: "Wählen Sie die Richtung, die für Sie am spannendsten klingt. Wenn Sie unsicher sind, kann CPI die beste Richtung ableiten.",
     type: "choice",
     options: [
       ["Kundenportal", "Ein digitaler Zugang für Kunden, Partner oder interne Teams."],
-      ["AI-SaaS", "Ein Produkt, das Prozesse automatisiert, Entscheidungen vorbereitet oder Know-how skalierbar macht."],
-      ["Dashboard", "Daten, Reports oder Workflows als steuerbares Produkt nutzbar machen."],
-      ["Noch offen", "CPI soll aus Website, Umsatzsignal und Geschäftsmodell die beste Richtung ableiten."]
+      ["AI-Workflow", "Ein Tool, das Arbeit automatisiert oder Entscheidungen vorbereitet."],
+      ["Dashboard", "Ein Produkt, das Daten, Reports oder Abläufe nutzbar macht."],
+      ["Noch offen", "CPI soll aus Website und Geschäftsmodell die beste Idee ableiten."]
     ]
   },
   {
     id: "goal",
     kicker: "Business-Ziel",
-    title: "Welcher Business-Effekt wäre für Sie am wertvollsten?",
-    hint: "Damit erkennt CPI, ob der Prototyp eher Wachstum, Effizienz oder ein neues digitales Angebot treiben soll.",
+    title: "Was soll der Prototyp für Ihr Unternehmen bringen?",
+    hint: "So erkennt CPI, ob der größte Hebel bei Wachstum, Effizienz oder einem neuen digitalen Angebot liegt.",
     type: "choice",
     options: [
-      ["Mehr Leads", "Ein klares digitales Angebot, das Interessenten schneller aktiviert und qualifiziert."],
-      ["Automatisierung", "Manuelle Arbeit reduzieren, Durchlaufzeiten verkürzen und Prozesse belastbarer machen."],
-      ["Neue Umsätze", "Aus Know-how, Daten oder Services ein skalierbares digitales Produkt entwickeln."],
-      ["Strategische Klarheit", "Schnell verstehen, welche Produktchance wirklich Sinn ergibt."]
+      ["Mehr Leads", "Ein Angebot, das Interessenten schneller versteht und qualifiziert."],
+      ["Weniger Aufwand", "Manuelle Arbeit reduzieren und Prozesse schneller machen."],
+      ["Neue Umsätze", "Aus Know-how, Daten oder Services ein digitales Produkt machen."],
+      ["Klarheit", "Schnell sehen, welche Produktidee wirklich Sinn ergibt."]
     ]
   },
   {
     id: "revenue",
     kicker: "Umsatzsignal",
     title: "Wie hoch ist Ihr monatlicher Umsatz?",
-    hint: "Dieses Signal hilft CPI einzuschätzen, wie groß der wirtschaftliche Hebel eines Prototyps sein kann.",
+    hint: "Der Umsatz hilft CPI einzuschätzen, wie groß der mögliche Business-Hebel ist.",
     type: "choice",
     options: [
-      ["Unter 25.000 €", "Frühe Phase oder kleineres digitales Vorhaben."],
-      ["25.000 bis 100.000 €", "Wachstum ist vorhanden, Tech soll den nächsten Schritt beschleunigen."],
-      ["100.000 bis 500.000 €", "Bestehende Nachfrage, Prozesse und Systeme sollen professionell skalieren."],
-      ["Über 500.000 €", "Hoher Hebel für Automatisierung, Plattformen und neue digitale Produkte."]
+      ["Unter 25.000 €", "Frühe Phase oder kleineres Vorhaben."],
+      ["25.000 bis 100.000 €", "Wachstum ist da, jetzt soll Tech helfen."],
+      ["100.000 bis 500.000 €", "Bestehende Nachfrage soll skalierbarer werden."],
+      ["Über 500.000 €", "Großer Hebel für Automatisierung, Plattformen oder neue Produkte."]
     ]
   },
   {
     id: "stage",
     kicker: "Ausgangslage",
-    title: "Wie konkret ist die Idee bereits?",
-    hint: "So erkennt CPI, ob zuerst Produktstrategie, Prototyping oder technische Umsetzung den größten Nutzen bringt.",
+    title: "Wie weit ist das Thema bei Ihnen?",
+    hint: "Damit CPI weiß, ob zuerst die Idee, der Prototyp oder die technische Umsetzung wichtig ist.",
     type: "choice",
     options: [
-      ["Noch keine Idee", "CPI soll aus Website und Geschäftsmodell eine Produktchance ableiten."],
-      ["Erste Idee", "Es gibt ein Zielbild, aber noch keine klare Produktlogik oder technische Roadmap."],
-      ["Prototyp vorhanden", "Etwas existiert bereits und soll professioneller, skalierbarer oder verkaufsfähiger werden."],
-      ["Bestehendes System", "Ein Tool, Portal oder Prozess soll zu einem besseren digitalen Produkt werden."]
+      ["Noch keine Idee", "CPI soll aus Website und Geschäftsmodell eine Chance ableiten."],
+      ["Erste Idee", "Es gibt eine Richtung, aber noch keinen klaren Prototyp."],
+      ["Prototyp vorhanden", "Etwas existiert bereits und soll besser werden."],
+      ["Bestehendes System", "Ein Tool oder Prozess soll zum besseren Produkt werden."]
     ]
   },
   {
     id: "timeline",
     kicker: "Timing",
-    title: "Wie schnell soll aus der Idee etwas Greifbares werden?",
-    hint: "Ein klares Zeitfenster zeigt, wie dringend und konkret das Vorhaben bereits ist.",
+    title: "Wann möchten Sie den nächsten Schritt machen?",
+    hint: "Das Timing zeigt, wie konkret das Projekt gerade ist.",
     type: "choice",
     options: [
-      ["Sofort", "Wir wollen kurzfristig entscheiden und den nächsten Schritt auslösen."],
-      ["In 30 Tagen", "Das Thema ist priorisiert und soll sauber vorbereitet werden."],
-      ["In 1 bis 3 Monaten", "Wir sammeln Optionen, technische Klarheit oder interne Zustimmung."],
-      ["Später", "Frühe Planung, aber mit echtem Interesse."]
+      ["Sofort", "Wir wollen schnell Klarheit und den nächsten Schritt."],
+      ["In 30 Tagen", "Das Thema ist wichtig und soll vorbereitet werden."],
+      ["In 1 bis 3 Monaten", "Wir prüfen Optionen und möchten eine Richtung."],
+      ["Später", "Noch früh, aber grundsätzlich interessant."]
     ]
   },
   {
     id: "website",
     kicker: "Website",
     title: "Wie lautet die Website Ihres Unternehmens?",
-    hint: "Darüber kann CPI Angebot, Branche, Zielgruppe und mögliches SaaS-Potenzial deutlich schneller einordnen.",
+    hint: "Darüber kann CPI Ihr Angebot schneller verstehen und eine bessere Einschätzung geben.",
     type: "url",
     placeholder: "https://ihr-unternehmen.de"
   }
@@ -249,7 +249,7 @@ function trackLeadConversion() {
 
   if (typeof window.fbq === "function") {
     window.fbq("trackSingle", "2154388281488546", "Lead", {
-      content_name: "Kostenloser Enterprise SaaS-Prototyp",
+      content_name: "Kostenloser SaaS-Prototyp",
       content_category: "Lead Funnel"
     }, {
       eventID: window.__cpiLeadEventId
@@ -264,7 +264,7 @@ function trackLeadConversion() {
     window.gtag("event", "lead", {
       send_to: "AW-350722464",
       event_category: "Lead Funnel",
-      event_label: "Kostenloser Enterprise SaaS-Prototyp"
+      event_label: "Kostenloser SaaS-Prototyp"
     });
 
     window.gtag("event", "conversion", {
