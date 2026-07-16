@@ -1289,6 +1289,7 @@ h1 {
 
 .start-copy,
 .start-panel,
+.max-offer-card,
 .start-strip > *,
 .founder-card > *,
 .start-body > *,
@@ -1327,6 +1328,36 @@ h1 {
   line-height: 1.5;
 }
 
+.offer-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.offer-points span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid rgba(93, 240, 177, 0.18);
+  border-radius: 999px;
+  color: #e8f7ff;
+  background: rgba(255, 255, 255, 0.055);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.offer-points span::before {
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 999px;
+  background: var(--green);
+  box-shadow: 0 0 16px rgba(93, 240, 177, 0.8);
+  content: "";
+}
+
 .start-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1348,6 +1379,100 @@ h1 {
   font-size: 14px;
   font-weight: 850;
   line-height: 1.35;
+}
+
+.max-offer-card {
+  display: grid;
+  gap: 16px;
+  align-self: stretch;
+  min-height: 360px;
+  padding: 18px;
+  border: 1px solid rgba(93, 240, 177, 0.22);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(30, 217, 255, 0.16), transparent 16rem),
+    linear-gradient(155deg, rgba(6, 16, 23, 0.96), rgba(8, 21, 28, 0.76));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 28px 70px rgba(0, 0, 0, 0.36);
+}
+
+.max-photo {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 205px;
+  overflow: hidden;
+  border-radius: 17px;
+  background:
+    linear-gradient(135deg, rgba(26, 26, 62, 0.92), rgba(10, 26, 64, 0.86)),
+    radial-gradient(circle at 50% 0%, rgba(93, 240, 177, 0.18), transparent 13rem);
+}
+
+.max-photo::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  content: "";
+  background: linear-gradient(transparent, rgba(4, 9, 14, 0.86));
+}
+
+.max-photo img {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  max-width: 82%;
+  max-height: 205px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 36px rgba(0, 0, 0, 0.35));
+}
+
+.max-card-copy {
+  display: grid;
+  gap: 7px;
+}
+
+.max-card-copy span {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.max-card-copy strong {
+  color: #f7fbff;
+  font-size: clamp(24px, 2.7vw, 34px);
+  font-weight: 950;
+  line-height: 1;
+}
+
+.max-card-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.max-card-proof {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 9px;
+}
+
+.max-card-proof em {
+  display: grid;
+  place-items: center;
+  min-height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 12px;
+  color: #dbe7f3;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+  text-align: center;
 }
 
 .start-panel {
@@ -1998,6 +2123,10 @@ h1 {
   .start-panel {
     min-height: 320px;
   }
+
+  .max-offer-card {
+    min-height: auto;
+  }
 }
 
 @media (max-width: 720px) {
@@ -2038,6 +2167,30 @@ h1 {
 
   .start-actions span {
     max-width: none;
+  }
+
+  .offer-points {
+    display: grid;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .offer-points span {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .max-photo {
+    min-height: 245px;
+  }
+
+  .max-photo img {
+    max-width: 78%;
+    max-height: 235px;
+  }
+
+  .max-card-proof {
+    grid-template-columns: 1fr;
   }
 
   .start-panel {
