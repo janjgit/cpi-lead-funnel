@@ -1,4 +1,4 @@
-const REQUIRED_LEAD_FIELDS = ["name", "email", "company"];
+const REQUIRED_LEAD_FIELDS = ["name", "email", "company", "phone"];
 const REQUIRED_ANSWER_FIELDS = ["direction", "goal", "revenue", "stage", "timeline", "website"];
 const DEFAULT_META_PIXEL_ID = "2154388281488546";
 const MIN_FUNNEL_ELAPSED_MS = 7000;
@@ -63,7 +63,7 @@ function validatePayload(payload) {
   const missingLeadField = REQUIRED_LEAD_FIELDS.find((field) => !payload.lead[field]);
   if (missingLeadField) return `Pflichtfeld fehlt: ${missingLeadField}.`;
   if (!isValidEmail(payload.lead.email)) return "Bitte eine gültige E-Mail-Adresse eintragen.";
-  if (payload.lead.phone && !isValidPhone(payload.lead.phone)) return "Bitte eine gültige Telefonnummer eintragen.";
+  if (!isValidPhone(payload.lead.phone)) return "Bitte eine gültige Telefonnummer eintragen.";
 
   const missingAnswerField = REQUIRED_ANSWER_FIELDS.find((field) => !payload.answers[field]);
   if (missingAnswerField) return `Quiz-Antwort fehlt: ${missingAnswerField}.`;
