@@ -3,29 +3,6 @@ const REQUIRED_ANSWER_FIELDS = ["direction", "goal", "revenue", "stage", "timeli
 const DEFAULT_META_PIXEL_ID = "2154388281488546";
 const MIN_FUNNEL_ELAPSED_MS = 7000;
 const MIN_LEAD_FORM_ELAPSED_MS = 1200;
-const BLOCKED_EMAIL_DOMAINS = new Set([
-  "gmail.com",
-  "googlemail.com",
-  "yahoo.com",
-  "yahoo.de",
-  "hotmail.com",
-  "hotmail.de",
-  "outlook.com",
-  "live.com",
-  "msn.com",
-  "icloud.com",
-  "me.com",
-  "mac.com",
-  "gmx.de",
-  "gmx.net",
-  "web.de",
-  "t-online.de",
-  "aol.com",
-  "proton.me",
-  "protonmail.com",
-  "mail.com",
-  "yandex.com"
-]);
 
 async function sha256(value) {
   const { createHash } = await import("node:crypto");
@@ -40,11 +17,6 @@ function json(response, status, payload) {
 
 function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || ""));
-}
-
-function isBusinessEmail(value) {
-  const domain = String(value || "").trim().toLowerCase().split("@").pop() || "";
-  return Boolean(domain && !BLOCKED_EMAIL_DOMAINS.has(domain));
 }
 
 function isValidPhone(value) {
@@ -90,8 +62,7 @@ function validatePayload(payload) {
 
   const missingLeadField = REQUIRED_LEAD_FIELDS.find((field) => !payload.lead[field]);
   if (missingLeadField) return `Pflichtfeld fehlt: ${missingLeadField}.`;
-  if (!isValidEmail(payload.lead.email)) return "Bitte eine gültige Business E-Mail eintragen.";
-  if (!isBusinessEmail(payload.lead.email)) return "Bitte tragen Sie Ihre geschäftliche E-Mail-Adresse ein.";
+  if (!isValidEmail(payload.lead.email)) return "Bitte eine gültige E-Mail-Adresse eintragen.";
   if (payload.lead.phone && !isValidPhone(payload.lead.phone)) return "Bitte eine gültige Telefonnummer eintragen.";
 
   const missingAnswerField = REQUIRED_ANSWER_FIELDS.find((field) => !payload.answers[field]);
