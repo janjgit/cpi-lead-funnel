@@ -96,6 +96,8 @@ const questions = [
 let currentStep = 0;
 let answers = {};
 let redirectTimer;
+let funnelStartedAt = Date.now();
+let leadStepShownAt = 0;
 
 function showScreen(id) {
   screens.forEach((screen) => {
@@ -112,6 +114,8 @@ function showScreen(id) {
 
 function startFunnel(event) {
   currentStep = 0;
+  funnelStartedAt = Date.now();
+  leadStepShownAt = 0;
   renderQuestion();
   showScreen("quiz");
 }
@@ -220,6 +224,7 @@ function previousQuestion() {
 }
 
 function renderLeadSummary() {
+  leadStepShownAt = Date.now();
   const rows = [
     ["SaaS-Richtung", answers.direction],
     ["Ziel", answers.goal],
@@ -285,11 +290,23 @@ function readCookie(name) {
 async function submitLead(event) {
   event.preventDefault();
   const formData = new FormData(leadForm);
+  const lead = Object.fromEntries(formData.entries());
+  const honeypot = [lead.website_url, lead.email_confirm].filter(Boolean).join(" ");
+  delete lead.website_url;
+  delete lead.email_confirm;
+
   const submission = {
     createdAt: new Date().toISOString(),
     answers,
-    lead: Object.fromEntries(formData.entries()),
-    page: window.location.href
+    lead,
+    page: window.location.href,
+    security: {
+      honeypot,
+      funnelStartedAt,
+      leadStepShownAt,
+      elapsedMs: Date.now() - funnelStartedAt,
+      leadFormElapsedMs: leadStepShownAt ? Date.now() - leadStepShownAt : 0
+    }
   };
 
   setFormState("loading", "Ihre Anfrage wird sicher übertragen...");
