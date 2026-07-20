@@ -1,6 +1,31 @@
 const REQUIRED_LEAD_FIELDS = ["name", "email", "company"];
 const REQUIRED_ANSWER_FIELDS = ["direction", "goal", "revenue", "stage", "timeline", "website"];
 const DEFAULT_META_PIXEL_ID = "2154388281488546";
+const MIN_FUNNEL_ELAPSED_MS = 7000;
+const MIN_LEAD_FORM_ELAPSED_MS = 1200;
+const BLOCKED_EMAIL_DOMAINS = new Set([
+  "gmail.com",
+  "googlemail.com",
+  "yahoo.com",
+  "yahoo.de",
+  "hotmail.com",
+  "hotmail.de",
+  "outlook.com",
+  "live.com",
+  "msn.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "gmx.de",
+  "gmx.net",
+  "web.de",
+  "t-online.de",
+  "aol.com",
+  "proton.me",
+  "protonmail.com",
+  "mail.com",
+  "yandex.com"
+]);
 
 async function sha256(value) {
   const { createHash } = await import("node:crypto");
@@ -17,6 +42,15 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || ""));
 }
 
+function isBusinessEmail(value) {
+  const domain = String(value || "").trim().toLowerCase().split("@").pop() || "";
+  return Boolean(domain && !BLOCKED_EMAIL_DOMAINS.has(domain));
+}
+
+function isValidPhone(value) {
+  return /^[+\d][\d\s()./-]{6,}$/.test(String(value || "").trim());
+}
+
 function isValidWebsite(value) {
   try {
     const url = new URL(String(value || ""));
@@ -26,14 +60,39 @@ function isValidWebsite(value) {
   }
 }
 
+function detectSpam(payload) {
+  const security = payload.security || {};
+  if (String(security.honeypot || "").trim()) {
+    return "Spam-Schutz ausgelöst.";
+  }
+
+  const elapsedMs = Number(security.elapsedMs || 0);
+  const leadFormElapsedMs = Number(security.leadFormElapsedMs || 0);
+
+  if (elapsedMs && elapsedMs < MIN_FUNNEL_ELAPSED_MS) {
+    return "Bitte nehmen Sie sich kurz Zeit für die Anfrage.";
+  }
+
+  if (leadFormElapsedMs && leadFormElapsedMs < MIN_LEAD_FORM_ELAPSED_MS) {
+    return "Bitte prüfen Sie Ihre Kontaktdaten noch einmal.";
+  }
+
+  return "";
+}
+
 function validatePayload(payload) {
   if (!payload || typeof payload !== "object") return "Ungültige Anfrage.";
   if (!payload.lead || typeof payload.lead !== "object") return "Kontaktdaten fehlen.";
   if (!payload.answers || typeof payload.answers !== "object") return "Quiz-Antworten fehlen.";
 
+  const spamError = detectSpam(payload);
+  if (spamError) return spamError;
+
   const missingLeadField = REQUIRED_LEAD_FIELDS.find((field) => !payload.lead[field]);
   if (missingLeadField) return `Pflichtfeld fehlt: ${missingLeadField}.`;
   if (!isValidEmail(payload.lead.email)) return "Bitte eine gültige Business E-Mail eintragen.";
+  if (!isBusinessEmail(payload.lead.email)) return "Bitte tragen Sie Ihre geschäftliche E-Mail-Adresse ein.";
+  if (payload.lead.phone && !isValidPhone(payload.lead.phone)) return "Bitte eine gültige Telefonnummer eintragen.";
 
   const missingAnswerField = REQUIRED_ANSWER_FIELDS.find((field) => !payload.answers[field]);
   if (missingAnswerField) return `Quiz-Antwort fehlt: ${missingAnswerField}.`;
